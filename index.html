@@ -1,0 +1,631 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>أداة زيادة الزوار للأندرويد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d10a11;
+            --secondary-color: #1a1a1a;
+            --accent-color: #f5f5f5;
+            --text-color: #333;
+            --light-text: #fff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            touch-action: manipulation;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: var(--light-text);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 8px;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 60px 0 70px 0;
+            padding: 0 10px;
+        }
+        
+        .control-panel {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .status-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 8px 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .input-group input {
+            flex: 1;
+            height: 45px;
+        }
+        
+        .counter-display {
+            min-width: 70px;
+            padding: 8px 10px;
+            background: rgba(209, 10, 17, 0.1);
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+            height: 45px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .time-display {
+            min-width: 70px;
+            padding: 8px 10px;
+            background: rgba(13, 110, 253, 0.1);
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            color: #0d6efd;
+            font-size: 14px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 15px;
+            height: 45px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+        
+        .btn-warning {
+            background-color: #ffc107;
+            color: var(--secondary-color);
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: var(--light-text);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .stats-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 8px 0;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .website-viewer {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            height: calc(100vh - 250px);
+            min-height: 300px;
+        }
+        
+        .viewer-header {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .viewer-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .viewer-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .viewer-controls button {
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+        }
+        
+        #websiteFrame {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        
+        .status-active {
+            background-color: #28a745;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .status-paused {
+            background-color: #ffc107;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .status-inactive {
+            background-color: #6c757d;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .timer-display {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .website-viewer {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span>زيادة الزوار</span>
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="#"><i class="fas fa-home"></i></a>
+                <a href="#"><i class="fas fa-cog"></i></a>
+                <a href="#"><i class="fas fa-question-circle"></i></a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="control-panel">
+            <h2 class="panel-title"><i class="fas fa-sliders-h"></i> لوحة التحكم</h2>
+            
+            <div class="status-container">
+                <span id="statusText">حالة التشغيل: غير نشط</span>
+                <div id="statusIndicator" class="status-indicator status-inactive"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="websiteUrl"><i class="fas fa-globe"></i> رابط الموقع</label>
+                <input type="text" id="websiteUrl" class="form-control" placeholder="https://example.com">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-sync-alt"></i> عدد الزيارات المطلوبة</label>
+                <div class="input-group">
+                    <input type="number" id="refreshCount" class="form-control" value="10" min="1">
+                    <div class="counter-display" id="completedVisits">0 / 10</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> مدة الزيارة (ثانية)</label>
+                <div class="input-group">
+                    <input type="number" id="visitDuration" class="form-control" value="30" min="1">
+                    <div class="time-display" id="visitTimer">00:00</div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search"></i> عرض</button>
+                <button id="increaseBtn" class="btn btn-secondary"><i class="fas fa-rocket"></i> بدء</button>
+                <button id="pauseBtn" class="btn btn-warning"><i class="fas fa-pause"></i></button>
+                <button id="stopBtn" class="btn btn-danger"><i class="fas fa-stop"></i></button>
+            </div>
+            
+            <div class="stats-card">
+                <div class="stat-label">إجمالي الزيارات:</div>
+                <div class="stat-value" id="visitCount">0</div>
+                <div class="timer-display" id="nextRefreshTimer">الزيارة التالية: 00:00</div>
+            </div>
+        </div>
+        
+        <div class="website-viewer">
+            <div class="viewer-header">
+                <div class="viewer-title"><i class="fas fa-eye"></i> معاينة الموقع</div>
+                <div class="viewer-controls">
+                    <button id="refreshBtn" title="تحديث"><i class="fas fa-redo"></i></button>
+                    <button id="fullscreenBtn" title="ملء الشاشة"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+            <iframe id="websiteFrame" src="about:blank"></iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        أداة زيادة الزوار للأندرويد &copy; 2023
+    </div>
+
+    <script>
+        let visitCount = 0;
+        let refreshInterval;
+        let visitInterval;
+        let status = 'inactive'; // inactive, active, paused
+        let visitTimerInterval;
+        let refreshTimerInterval;
+        let remainingVisitTime = 0;
+        let remainingRefreshTime = 0;
+        let completedVisits = 0;
+        let maxVisits = 0;
+        
+        // عناصر DOM
+        const websiteUrl = document.getElementById('websiteUrl');
+        const refreshCount = document.getElementById('refreshCount');
+        const visitDuration = document.getElementById('visitDuration');
+        const searchBtn = document.getElementById('searchBtn');
+        const increaseBtn = document.getElementById('increaseBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const visitCountEl = document.getElementById('visitCount');
+        const websiteFrame = document.getElementById('websiteFrame');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const statusIndicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const visitTimer = document.getElementById('visitTimer');
+        const completedVisitsEl = document.getElementById('completedVisits');
+        const nextRefreshTimer = document.getElementById('nextRefreshTimer');
+        
+        // عرض الموقع يدوياً
+        searchBtn.addEventListener('click', function() {
+            let url = websiteUrl.value.trim();
+            
+            if (!url) {
+                alert('الرجاء إدخال رابط الموقع أولاً');
+                return;
+            }
+            
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            
+            websiteFrame.src = url;
+        });
+        
+        // بدء زيادة الزوار
+        increaseBtn.addEventListener('click', function() {
+            const visitDurationValue = parseInt(visitDuration.value) * 1000;
+            maxVisits = parseInt(refreshCount.value);
+            let url = websiteUrl.value.trim();
+            
+            if (!url) {
+                alert('الرجاء إدخال رابط الموقع أولاً');
+                return;
+            }
+            
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            
+            // إيقاف أي عمليات سابقة
+            stopProcess();
+            
+            // بدء العملية
+            status = 'active';
+            completedVisits = 0;
+            updateStatus();
+            updateCompletedVisits();
+            
+            // نبدأ فقط المؤقت للزيارة الثانية
+            startRefreshTimer(visitDurationValue);
+        });
+        
+        // إيقاف مؤقت
+        pauseBtn.addEventListener('click', function() {
+            if (status === 'active') {
+                status = 'paused';
+                clearInterval(refreshTimerInterval);
+                clearInterval(visitTimerInterval);
+                updateStatus();
+            } else if (status === 'paused') {
+                status = 'active';
+                const visitDurationValue = parseInt(visitDuration.value) * 1000;
+                startRefreshTimer(visitDurationValue);
+                updateStatus();
+            }
+        });
+        
+        // إيقاف العملية
+        stopBtn.addEventListener('click', stopProcess);
+        
+        // تحديث الموقع يدوياً
+        refreshBtn.addEventListener('click', function() {
+            if (websiteFrame.src && websiteFrame.src !== 'about:blank') {
+                websiteFrame.src = websiteFrame.src;
+            }
+        });
+        
+        // وضع ملء الشاشة
+        fullscreenBtn.addEventListener('click', function() {
+            if (websiteFrame.requestFullscreen) {
+                websiteFrame.requestFullscreen();
+            } else if (websiteFrame.webkitRequestFullscreen) {
+                websiteFrame.webkitRequestFullscreen();
+            } else if (websiteFrame.msRequestFullscreen) {
+                websiteFrame.msRequestFullscreen();
+            }
+        });
+        
+        // وظيفة مساعدة لتحديث الموقع
+        function refreshWebsite(url, duration) {
+            if (completedVisits >= maxVisits) {
+                stopProcess();
+                return;
+            }
+            
+            websiteFrame.src = url;
+            visitCount++;
+            completedVisits++;
+            visitCountEl.textContent = visitCount;
+            updateCompletedVisits();
+            
+            // بدء عداد التنازلي للزيارة
+            startVisitTimer(duration);
+            
+            // إيقاف التحميل بعد مدة الزيارة
+            setTimeout(function() {
+                if (status === 'active') {
+                    websiteFrame.src = 'about:blank';
+                }
+            }, duration);
+        }
+        
+        // بدء عداد التحديث
+        function startRefreshTimer(duration) {
+            remainingRefreshTime = duration;
+            updateNextRefreshTimer();
+            
+            refreshTimerInterval = setInterval(function() {
+                remainingRefreshTime -= 1000;
+                if (remainingRefreshTime <= 0) {
+                    let url = websiteUrl.value.trim();
+                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                        url = 'https://' + url;
+                    }
+                    refreshWebsite(url, parseInt(visitDuration.value) * 1000);
+                    remainingRefreshTime = duration;
+                }
+                updateNextRefreshTimer();
+            }, 1000);
+        }
+        
+        // بدء عداد الزيارة
+        function startVisitTimer(duration) {
+            remainingVisitTime = duration;
+            updateVisitTimer();
+            
+            clearInterval(visitTimerInterval);
+            visitTimerInterval = setInterval(function() {
+                remainingVisitTime -= 1000;
+                if (remainingVisitTime <= 0) {
+                    clearInterval(visitTimerInterval);
+                    visitTimer.textContent = "00:00";
+                } else {
+                    updateVisitTimer();
+                }
+            }, 1000);
+        }
+        
+        // تحديث عرض عداد الزيارة
+        function updateVisitTimer() {
+            const minutes = Math.floor(remainingVisitTime / 60000);
+            const seconds = Math.floor((remainingVisitTime % 60000) / 1000);
+            visitTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // تحديث عرض عداد التحديث التالي
+        function updateNextRefreshTimer() {
+            const minutes = Math.floor(remainingRefreshTime / 60000);
+            const seconds = Math.floor((remainingRefreshTime % 60000) / 1000);
+            nextRefreshTimer.textContent = `الزيارة التالية: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // تحديث عداد الزيارات المكتملة
+        function updateCompletedVisits() {
+            completedVisitsEl.textContent = `${completedVisits} / ${maxVisits}`;
+        }
+        
+        // وظيفة مساعدة لإيقاف العملية
+        function stopProcess() {
+            clearInterval(refreshInterval);
+            clearInterval(visitInterval);
+            clearInterval(visitTimerInterval);
+            clearInterval(refreshTimerInterval);
+            status = 'inactive';
+            updateStatus();
+            visitTimer.textContent = "00:00";
+            nextRefreshTimer.textContent = "الزيارة التالية: 00:00";
+            websiteFrame.src = 'about:blank';
+        }
+        
+        // تحديث حالة التشغيل
+        function updateStatus() {
+            statusIndicator.className = 'status-indicator ';
+            
+            if (status === 'active') {
+                statusIndicator.classList.add('status-active');
+                statusText.textContent = 'حالة التشغيل: نشط';
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else if (status === 'paused') {
+                statusIndicator.classList.add('status-paused');
+                statusText.textContent = 'حالة التشغيل: متوقف مؤقتاً';
+                pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                statusIndicator.classList.add('status-inactive');
+                statusText.textContent = 'حالة التشغيل: غير نشط';
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+        }
+    </script>
+</body>
+</html>
